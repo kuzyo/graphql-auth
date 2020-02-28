@@ -4,34 +4,58 @@
   "description": "Awesome project developed with TypeORM.",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.1",
-    "@types/jest": "^25.1.2",
+    "@types/ioredis": "^3.2.7",
+    "@types/jest": "^22.2.3",
     "@types/node": "^9.6.6",
+    "@types/node-fetch": "^2.5.4",
     "@types/uuid": "^3.4.3",
-    "@types/yup": "^0.26.31",
+    "@types/yup": "^0.24.3",
     "gql2ts": "^1.7.2",
-    "jest": "^25.1.0",
+    "jest": "^22.4.3",
     "nodemon": "^1.17.3",
-    "ts-jest": "^25.2.0",
+    "ts-jest": "22.4.4",
     "ts-node": "6.0.0",
     "tslint": "^5.9.1",
     "tslint-config-prettier": "^1.12.0",
-    "typescript": "^3.7.5"
+    "typescript": "2.8.3"
   },
   "dependencies": {
+    "@gql2ts/from-schema": "^1.10.1",
+    "@types/graphql": "^14.5.0",
     "bcryptjs": "^2.4.3",
     "graphql": "^14.6.0",
     "graphql-import": "^0.5.0",
     "graphql-request": "^1.5.1",
-    "graphql-tools": "^4.0.6",
+    "graphql-tools": "^3.0.0",
     "graphql-yoga": "^1.9.2",
+    "ioredis": "^3.2.2",
+    "node-fetch": "^2.6.0",
     "pg": "^7.4.1",
     "reflect-metadata": "^0.1.12",
     "typeorm": "0.2.0",
-    "yup": "^0.28.1"
+    "uuid": "^3.2.1",
+    "yup": "^0.24.1"
   },
   "scripts": {
     "start": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
-    "test": "NODE_ENV=test jest --forceExit",
-    "gen-schema-types": "gql2ts src/schema.graphql -o src/types/schema.d.ts"
+    "test": "NODE_ENV=test jest --watch",
+    "gen-schema-types": "ts-node src/scripts/createTypes.ts"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/",
+    "globalSetup": "./src/test/callSetup.js",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
