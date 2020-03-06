@@ -3,17 +3,24 @@ import { createTypeormConnection } from "./createTypeormConnection";
 import { User } from "../entity/User";
 import * as Redis from "ioredis";
 import fetch from "node-fetch";
+import { Connection } from "typeorm";
 
 let userId = "";
 const redis = new Redis();
 
+let conn: Connection;
+
 beforeAll(async () => {
-  await createTypeormConnection();
+  conn = await createTypeormConnection();
   const user = await User.create({
     email: "bob@email.com",
     password: "1231j2k3j13"
   }).save();
   userId = user.id;
+});
+
+afterAll(async () => {
+  conn.close();
 });
 
 describe("createConfirmEmailLink", () => {
@@ -34,6 +41,6 @@ describe("createConfirmEmailLink", () => {
     const response = await fetch(`${process.env.TEST_HOST}/confirm/3123412412`);
 
     const text = await response.text();
-    expect(text).toEqual("invalid")
+    expect(text).toEqual("invalid");
   });
 });

@@ -1,8 +1,20 @@
 import { request } from "graphql-request";
 import errorMessages from "../../utils/errorMessages";
+import { Connection } from "typeorm";
+import { createTypeormConnection } from "../../utils/createTypeormConnection";
 
 const email = "test@email.com";
 const password = "1234";
+
+let conn: Connection;
+
+beforeAll(async () => {
+  conn = await createTypeormConnection();
+});
+
+afterAll(async () => {
+  conn.close();
+});
 
 const mutation = (e: string, p: string) => `
   mutation {
