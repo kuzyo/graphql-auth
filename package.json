@@ -10,6 +10,7 @@
     "@types/jest": "^22.2.3",
     "@types/node": "^9.6.6",
     "@types/node-fetch": "^2.5.4",
+    "@types/request-promise": "^4.1.45",
     "@types/uuid": "^3.4.3",
     "@types/yup": "^0.24.3",
     "gql2ts": "^1.7.2",
@@ -37,6 +38,7 @@
     "node-fetch": "^2.6.0",
     "pg": "^7.4.1",
     "reflect-metadata": "^0.1.12",
+    "request-promise": "^4.2.5",
     "typeorm": "0.2.0",
     "uuid": "^3.2.1",
     "yup": "^0.24.1"
