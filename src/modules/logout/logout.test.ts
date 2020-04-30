@@ -2,6 +2,7 @@ import axios from "axios";
 import { Connection } from "typeorm";
 import { createTypeormConnection } from "../../utils/createTypeormConnection";
 import { User } from "../../entity/User";
+import { TestClient } from "../../utils/TestClient";
 
 beforeAll(async () => {
   conn = await createTypeormConnection();
@@ -46,7 +47,22 @@ const logoutMutation = `
 `;
 
 describe("logout", () => {
-  test("should logout current user", async () => {
+  test('multiple sessions', async () => {
+    const session1 = new TestClient(process.env.TEST_HOST as string)
+    const session2 = new TestClient(process.env.TEST_HOST as string)
+
+    await session1.login(email, password)
+    await session2.login(email, password)
+
+
+    expect(await session1.me()).toEqual(await session2.me())
+
+    await session1.logout()
+
+    expect(await session1.me()).toEqual(await session2.me())
+  })
+  
+  test("single session", async () => {
     await axios.post(
       process.env.TEST_HOST as string,
       {
