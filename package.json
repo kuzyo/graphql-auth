@@ -37,7 +37,7 @@
     "graphql-tools": "^3.0.0",
     "graphql-yoga": "^1.9.2",
     "ioredis": "^3.2.2",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "pg": "^7.4.1",
